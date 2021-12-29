@@ -26,7 +26,7 @@ jobs:
         run: |-
           echo Hello, world!
           echo "::set-output name=error_msg::test something\n"
-          echo "::set-output name=cmd_output::$(ls -la)\n"
+          echo "::set-output name=cmd_output::$(git status)\n"
 
       # Runs a set of commands using the runners shell
       - name: get output
@@ -38,5 +38,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "Rebase Bot action has failed.\n```\n ${{join(steps.step_under_test.outputs.*, '\n')}}\n```"
+              body: "Rebase Bot action has failed.\n```\n${{join(steps.step_under_test.outputs.*, '\n')}}\n```"
             })
