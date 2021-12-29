@@ -32,4 +32,4 @@ jobs:
       - name: get output
         run: echo ${MESSAGE}
         env:
-          SMESSAGE: ${{join(steps.step_under_test.outputs.*, '\n')}}
+          MESSAGE: ${{join(steps.step_under_test.outputs.*, '\n')}}
