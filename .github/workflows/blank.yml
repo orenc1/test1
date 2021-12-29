@@ -32,7 +32,7 @@ jobs:
       - name: get output
         uses: actions/github-script@v5
         with:
-          github-token: ${{secrets.HCO_BOT_TOKEN}}
+          github-token: ${{secrets.TEMP}}
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
