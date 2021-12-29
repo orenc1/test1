@@ -25,8 +25,8 @@ jobs:
         id: step_under_test
         run: |-
           echo Hello, world!
-          echo "::set-output error_msg::test something\n"
-          echo "::set-output cmd_output::$(ls l-la)\n"
+          echo "::set-output name=error_msg::test something\n"
+          echo "::set-output name=cmd_output::$(ls l-la)\n"
 
       # Runs a set of commands using the runners shell
       - name: get output
