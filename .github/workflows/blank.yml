@@ -26,10 +26,17 @@ jobs:
         run: |-
           echo Hello, world!
           echo "::set-output name=error_msg::test something\n"
-          echo "::set-output name=cmd_output::$(ls l-la)\n"
+          echo "::set-output name=cmd_output::$(ls -la)\n"
 
       # Runs a set of commands using the runners shell
       - name: get output
-        run: echo ${MESSAGE}
-        env:
-          MESSAGE: ${{join(steps.step_under_test.outputs.*, '\n')}}
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.HCO_BOT_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "Rebase Bot action has failed.\n ${{join(steps.step_under_test.outputs.*, '\n')}}"
+            })
